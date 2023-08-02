@@ -49,35 +49,35 @@ class AcodePlugin {
                     start: [
                         {
                             // a comment
-                            token: "comment",
+                            token: "comment.mclang",
                             regex: /(^\s*##.*|\s+##.*)$/
                         },
                         {
                             // "=" character
-                            token: "keyword",
+                            token: "keyword.mclang",
                             regex: /=/
                         },
                         {
                             // translation value
-                            token: "string",
+                            token: "string.mclang",
                             regex: /(?<==)/,
                             push: [
                                 {
                                     // parameters
-                                    token: "identifier",
+                                    token: "identifier.mclang",
                                     regex: /%(%|[a-z]|[1-9]\d*(?:\$[a-z])?|\.\d+[df\$])/
                                 },
                                 {
                                     // icons
-                                    token: "storage",
+                                    token: "storage.mclang",
                                     regex: /:[_a-zA-Z0-9.]+:/
                                 },
                                 {
-                                    defaultToken: "string"
+                                    defaultToken: "string.mclang"
                                 },
                                 {
                                     // end
-                                    token: "string",
+                                    token: "string.mclang",
                                     regex: /((?=\t+##)|$)/,
                                     next: "pop"
                                 }
@@ -85,7 +85,7 @@ class AcodePlugin {
                         },
                         {
                             // translation key
-                            token: "variable",
+                            token: "variable.mclang",
                             regex: /^[^=]+/
                         }
                     ]
@@ -153,10 +153,10 @@ class AcodePlugin {
                 "exportstats", "eyes", "facing", "feet", "fill", "filtered", "fog", "give",
                 "if", "in", "insert", "keep", "kill", "list", "listen", "load", "loot",
                 "mainhand", "masked", "matches", "objectives", "offhand", "on_area_loaded",
-                "open", "operation", "play", "pos", "positioned", "preload", "profiler",
-                "push", "queue", "query", "rain", "random", "remove", "remove_all", "replace",
-                "reset", "rotated", "run", "runset", "runsetuntilfail", "runthese", "runthis",
-                "save", "score", "set", "setdisplay", "sidebar", "spawn", "start",
+                "open", "operation", "play", "players", "pos", "positioned", "preload",
+                "profiler", "push", "queue", "query", "rain", "random", "remove", "remove_all",
+                "replace", "reset", "rotated", "run", "runset", "runsetuntilfail", "runthese",
+                "runthis", "save", "score", "set", "setdisplay", "sidebar", "spawn", "start",
                 "start_riding", "stop", "stop_riding", "stopall", "subtitle", "summon_ride",
                 "summon_rider", "test", "thunder", "tickingarea", "times", "title", "unless",
                 "volume", "watchdog"
@@ -175,85 +175,85 @@ class AcodePlugin {
                     start: [
                         {
                             // a comment
-                            token: "comment",
+                            token: "comment.mcfunction",
                             regex: /\s*#.*/
                         },
                         {
                             // a string (text within double quotes)
-                            token: "string",
+                            token: "string.mcfunction",
                             regex: /"/,
                             push: [
                                 {
                                     // escape characters
-                                    token: "constant.language.escape",
+                                    token: "constant.language.escape.mcfunction",
                                     regex: escapeRe
                                 },
                                 {
                                     // back to parent rules
-                                    token: "string",
+                                    token: "string.mcfunction",
                                     regex: /"/,
                                     next: "pop"
                                 },
                                 {
                                     // part of the string
-                                    defaultToken: "string"
+                                    defaultToken: "string.mcfunction"
                                 }
                             ]
                         },
                         {
                             // numbers
-                            token: "constant.numeric",
+                            token: "constant.numeric.mcfunction",
                             regex: /[-+]?(0|[1-9]\d*)(\.\d+)?/
                         },
                         {
                             // boolean
-                            token: "constant.language.boolean",
-                            regex: /(true|false)/
+                            token: "constant.language.boolean.mcfunction",
+                            regex: /\b(true|false)\b/
                         },
                         {
                             // punctuation operators
-                            token: "punctuation.operator",
+                            token: "punctuation.operator.mcfunction",
                             regex: /[!,.:]/
                         },
                         {
                             // keyword operators
-                            token: "keyword.operator",
+                            token: "keyword.operator.mcfunction",
                             regex: /[-+*/=^~]/
                         },
                         {
                             // selector
-                            token: "storage",
+                            token: "storage.selector.mcfunction",
                             regex: /@[aerpsv]/
                         },
                         {
+                            // variable (like in shell script), for target selectors
+                            token: "variable.mcfunction",
+                            regex: /[a-zA-Z0-9_]+(?==)/
+                        },
+                        {
                             // bracket
-                            token: "paren",
+                            token: "paren.mcfunction",
                             regex: /[\[\]\{\}]/
                         },
                         {
                             // minecraft namespace
-                            token: "identifier.class",
+                            token: "identifier.class.mcfunction",
                             regex: /\bminecraft\b/
                         },
                         {
                             // commands
-                            token: "keyword",
+                            token: "keyword.mcfunction",
                             regex: "\\b(" + cmds.join("|") + ")\\b"
                         },
                         {
                             // sub-commands
-                            token: "identifier",
+                            token: "identifier.mcfunction",
                             regex: "\\b(" + subCmds.join("|") + ")\\b"
                         },
                         {
                             // dimensions
-                            token: "constant.language",
+                            token: "constant.language.mcfunction",
                             regex: "\\b(" + dims.join("|") + ")\\b"
-                        },
-                        {
-                            // variable (like in shell script), for target selectors
-                            token: "variable",
-                            regex: /[a-zA-Z0-9_]+(?==)/
                         }
                     ]
                 };
