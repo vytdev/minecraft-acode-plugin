@@ -159,7 +159,7 @@ class AcodePlugin {
                 "runthis", "save", "score", "set", "setdisplay", "sidebar", "spawn", "start",
                 "start_riding", "stop", "stop_riding", "stopall", "subtitle", "summon_ride",
                 "summon_rider", "test", "thunder", "tickingarea", "times", "title", "unless",
-                "volume", "watchdog"
+                "volume", "watchdog", "@p", "@a", "@e", "@s"
             ];
             // dimensions, used in some commands
             const dims = [
